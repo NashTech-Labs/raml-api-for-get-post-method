@@ -1,0 +1,59 @@
+#%RAML 1.0
+title: MyAPI
+version: 1.0
+baseUri: http://com.foo.bar/api
+/buses:
+  get:
+    queryParameters:
+      destination:
+        enum: [NCR, ABC, PQR, BBR, XMF]
+      busstands:
+        enum: [petrol pump, sector 30, kashmiri gate]
+    responses:
+      200:
+        body:
+          application/json:
+            example: |
+                [
+                    {
+                      "busstand": "petrol pump",
+                      "busCode": "up-87-1222",
+                      "frombusstandCode": "UP",
+                      "departureDate": "Dec 30, 2022",
+                      "emptySeats": 0,
+                      "totalSeats": 35,
+                      "price": 1000,
+                    },
+                    {
+                      "busstand": "sector 30",
+                      "busCode": "d-12-3421",
+                      "frombusstandCode": "120",
+                      "tobusstandCode": "140",
+                      "departureDate": "Jan 1, 2023",
+                      "emptySeats": 30,
+                      "totalSeats": 50,
+                      "price": 4500,
+                    }
+                ]
+
+  post:
+    body:
+      application/json:
+        example: |
+          {
+            "busstand": "kashmiri gate",
+            "busCode": "d-23-4534",
+            "frombusstandCode": "130",
+            "tobusstandCode": "150",
+            "departureDate": "Jan 12, 2023",
+            "emptySeats": 32,
+            "totalSeats": 40,
+            "price": 2500,
+          }
+    responses:
+      201:
+        body:
+          application/json:
+            example: |
+              {"message": "Bus ticket is booked"}
+
